@@ -62,7 +62,7 @@
 	  <label <?php if(!empty($errors['check1'])) print 'class="error_check"'?>><b>С контрактом ознакомлен (а)</b></label>
       <input type="checkbox" id="check1" name="check1" value="check1" <?php if (isset($values['check1'])&&$values['check1'] == 'check1') print("checked"); ?>><br />
 	  
-      <p><button type="submit" value="send">Отправить<button></p>
+      <p><button type="submit" value="send">Отправить</p>
     </form>
     </div>
   </body>
