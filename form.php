@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Задание 4</title>
+    <title>Задание 5</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -48,11 +48,14 @@
 	  
 	  <b>Сверхспособности:</b><br />
       <label><select name="super[]" multiple="multiple" <?php if (!empty($errors['super'])) print 'class="error"';?>>
-          <option value="bessmertie" <?php if($values['super'] == 'bessmertie') print 'checked';?>>Бессмертие</option>
-          <option value="steny" <?php if($values['super'] == 'steny') print 'checked';?>>Прохождение скозь стены</option>
-		  <option value="levitation" <?php if($values['super'] == 'levitation') print 'checked';?>>Левитация</option>
-          <option value="mysli" <?php if($values['super'] == 'mysli') print 'checked';?>>Чтение мыслей</option>
-        </select>
+        <?php
+				$sql = 'SELECT * FROM SuperDef';
+				foreach ($db->query($sql) as $row) {
+					?><option value=<?php print $row['id']?> name=super[] <?php if(isset($values['super'][$row['id']])&&empty($_COOKIE['super_error']))print("checked"); print "\t"; ?>>
+					<?php print $row['name'] . "\t";
+				}
+			?></option>
+		</select>
       </label><br />
 	  
 	  <label for="info"><b>Биография:</b></label><br />
@@ -64,6 +67,7 @@
 	  
       <p><button type="submit" value="send">Отправить</p>
     </form>
+	<?php if(!empty($_COOKIE[session_name()]) && !empty($_SESSION['login'])) print( '<div id="footer">Вход ' . $_SESSION["login"]. '<br> <a href=login.php?do=logout> Выход</a><br></div>');?>
     </div>
   </body>
 </html>
